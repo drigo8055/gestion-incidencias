@@ -1,4 +1,4 @@
-# Implementation Plan: Sistema de Gestión de Incidencias (SGI)
+﻿# Implementation Plan: Sistema de Gestión de Incidencias (SGI)
 
 ## Overview
 
@@ -9,7 +9,7 @@ Plan de implementación incremental para el SGI. El backend se construye con Fas
 ## Tasks
 
 - [ ] 1. Configuración del proyecto y estructura base
-  - [ ] 1.1 Inicializar estructura de directorios del backend FastAPI
+  - [x] 1.1 Inicializar estructura de directorios del backend FastAPI
     - Crear `fastapi_app/` con subdirectorios: `core/`, `db/`, `models/`, `schemas/`, `repositories/`, `services/`, `routers/`
     - Crear `__init__.py` en cada subdirectorio
     - Crear `fastapi_app/main.py` con instancia mínima de FastAPI (sin rutas aún)
@@ -338,7 +338,7 @@ Plan de implementación incremental para el SGI. El backend se construye con Fas
 
 - [ ] 17. Routers REST del backend
   - [ ] 17.1 Implementar `routers/incidencias.py`
-    - `POST /api/v1/incidencias` (USUARIO), `GET /api/v1/incidencias` (Autenticado), `GET /api/v1/incidencias/{id}` (Autenticado), `PATCH /api/v1/incidencias/{id}/estado` (TECNICO, SUPERVISOR), `PATCH /api/v1/incidencias/{id}/prioridad` (SUPERVISOR), `PATCH /api/v1/incidencias/{id}/asignar` (SUPERVISOR)
+    - `POST /api/v1/incidencias` (USUARIO), `GET /api/v1/incidencias` (Autenticado), `GET /api/v1/incidencias/{id}` (Autenticado), `PATCH /api/v1/incidencias/{id}/estado` (TECNICO, SUPERVISOR, ADMINISTRADOR), `PATCH /api/v1/incidencias/{id}/prioridad` (SUPERVISOR, ADMINISTRADOR), `PATCH /api/v1/incidencias/{id}/asignar` (SUPERVISOR, ADMINISTRADOR)
     - _Requirements: 3.1–3.7, 4.1–4.7, 5.1–5.7, 6.1–6.5, 7.1–7.4_
 
   - [ ] 17.2 Implementar `routers/comentarios.py` y `routers/historial.py`
