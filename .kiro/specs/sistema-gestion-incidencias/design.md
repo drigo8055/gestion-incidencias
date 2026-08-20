@@ -185,7 +185,7 @@ erDiagram
         TIMESTAMP temp_password_expires_at
         INTEGER failed_login_attempts
         TIMESTAMP locked_until
-        TIMESTAMP created_at
+        TIMESTAMP timestamp_utc
         TIMESTAMP updated_at
     }
 
@@ -193,7 +193,7 @@ erDiagram
         UUID id PK
         VARCHAR(100) nombre UK
         BOOLEAN is_active
-        TIMESTAMP created_at
+        TIMESTAMP timestamp_utc
     }
 
     INCIDENCIA {
@@ -216,7 +216,7 @@ erDiagram
         UUID incidencia_id FK
         UUID autor_id FK
         TEXT contenido
-        TIMESTAMP created_at
+        TIMESTAMP timestamp_utc
     }
 
     HISTORIAL {
@@ -273,7 +273,7 @@ class TipoAccionEnum(str, Enum):
 
 ### Tabla HISTORIAL — notas de implementación
 
-- La tabla tiene `created_at` como única columna de tiempo; no hay `updated_at`.
+- La tabla tiene `timestamp_utc` como única columna de tiempo; no hay `updated_at`.
 - A nivel de base de datos, no se crean endpoints ni triggers que permitan UPDATE o DELETE sobre esta tabla.
 - El campo `timestamp_utc` se almacena con tipo `TIMESTAMP(3) WITH TIME ZONE` para precisión de milisegundos.
 
@@ -360,7 +360,7 @@ class TipoAccionEnum(str, Enum):
 | `POST` | `/incidencias` | USUARIO | Crear incidencia |
 | `GET` | `/incidencias` | Autenticado | Listar incidencias (filtrada por rol) |
 | `GET` | `/incidencias/{id}` | Autenticado | Detalle de incidencia |
-| `PATCH` | `/incidencias/{id}/estado` | TECNICO, SUPERVISOR | Cambiar estado |
+| `PATCH` | `/incidencias/{id}/estado` | TECNICO, SUPERVISOR, ADMINISTRADOR | Cambiar estado |
 | `PATCH` | `/incidencias/{id}/prioridad` | SUPERVISOR | Cambiar prioridad |
 | `PATCH` | `/incidencias/{id}/asignar` | SUPERVISOR | Asignar / reasignar técnico |
 
@@ -440,7 +440,7 @@ class TipoAccionEnum(str, Enum):
       "id": "uuid",
       "autor": { "id": "uuid", "nombre": "string", "rol": "string" },
       "contenido": "string",
-      "created_at": "datetime"
+      "timestamp_utc": "datetime"
     }
   ]
 }
@@ -724,7 +724,7 @@ La columna `timestamp_utc` se genera en la capa de servicio con `datetime.utcnow
 
 ### Property 17: Invariante de comentario persistido
 
-*Para cualquier* comentario con `1 ≤ len(contenido) ≤ 1000` enviado por un actor autorizado a una incidencia accesible, el comentario persistido debe contener el `autor_id` del actor, el contenido exacto y un `created_at` UTC no nulo.
+*Para cualquier* comentario con `1 ≤ len(contenido) ≤ 1000` enviado por un actor autorizado a una incidencia accesible, el comentario persistido debe contener el `autor_id` del actor, el contenido exacto y un `timestamp_utc` UTC no nulo.
 
 **Validates: Requirements 8.1**
 
@@ -740,7 +740,7 @@ La columna `timestamp_utc` se genera en la capa de servicio con `datetime.utcnow
 
 ### Property 19: Orden cronológico de comentarios
 
-*Para cualquier* incidencia con N comentarios, la lista retornada por el endpoint de comentarios debe estar ordenada de forma que `items[i].created_at ≤ items[i+1].created_at` para todo `0 ≤ i < N-1`.
+*Para cualquier* incidencia con N comentarios, la lista retornada por el endpoint de comentarios debe estar ordenada de forma que `items[i].timestamp_utc ≤ items[i+1].timestamp_utc` para todo `0 ≤ i < N-1`.
 
 **Validates: Requirements 8.6**
 
