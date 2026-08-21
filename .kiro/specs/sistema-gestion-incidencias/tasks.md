@@ -22,7 +22,7 @@ Plan de implementación incremental para el SGI. El backend se construye con Fas
     - Crear `.env.example` con todas las variables requeridas (sin valores reales)
     - _Requirements: 1.3, 1.6_
 
-  - [ ] 1.3 Configurar SQLAlchemy y Alembic
+  - [x] 1.3 Configurar SQLAlchemy y Alembic
     - Implementar `fastapi_app/db/base.py` con `DeclarativeBase`
     - Implementar `fastapi_app/db/session.py` con engine, `SessionLocal` y dependencia `get_db`
     - Inicializar Alembic (`alembic init alembic/`) y configurar `alembic.ini` y `alembic/env.py` para apuntar a `DATABASE_URL` del settings
