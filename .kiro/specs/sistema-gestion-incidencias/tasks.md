@@ -16,7 +16,7 @@ Plan de implementación incremental para el SGI. El backend se construye con Fas
     - Crear `requirements.txt` con dependencias: `fastapi`, `uvicorn[standard]`, `sqlalchemy`, `psycopg2-binary`, `pydantic-settings`, `python-jose[cryptography]`, `passlib[bcrypt]`, `alembic`, `hypothesis`, `pytest`, `pytest-asyncio`, `httpx`
     - _Requirements: todos (base de proyecto)_
 
-  - [ ] 1.2 Configurar settings y variables de entorno
+  - [x] 1.2 Configurar settings y variables de entorno
     - Implementar `fastapi_app/core/config.py` con `Settings` usando `pydantic-settings`
     - Campos mínimos: `DATABASE_URL`, `SECRET_KEY`, `ACCESS_TOKEN_EXPIRE_MINUTES=60`, `ALGORITHM="HS256"`
     - Crear `.env.example` con todas las variables requeridas (sin valores reales)
