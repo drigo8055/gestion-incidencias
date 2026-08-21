@@ -1,4 +1,4 @@
-# Implementation Plan: Sistema de Gestión de Incidencias (SGI)
+﻿# Implementation Plan: Sistema de Gestión de Incidencias (SGI)
 
 ## Overview
 
@@ -9,14 +9,14 @@ Plan de implementación incremental para el SGI. El backend se construye con Fas
 ## Tasks
 
 - [ ] 1. Configuración del proyecto y estructura base
-  - [ ] 1.1 Inicializar estructura de directorios del backend FastAPI
+  - [x] 1.1 Inicializar estructura de directorios del backend FastAPI
     - Crear `fastapi_app/` con subdirectorios: `core/`, `db/`, `models/`, `schemas/`, `repositories/`, `services/`, `routers/`
     - Crear `__init__.py` en cada subdirectorio
     - Crear `fastapi_app/main.py` con instancia mínima de FastAPI (sin rutas aún)
     - Crear `requirements.txt` con dependencias: `fastapi`, `uvicorn[standard]`, `sqlalchemy`, `psycopg2-binary`, `pydantic-settings`, `python-jose[cryptography]`, `passlib[bcrypt]`, `alembic`, `hypothesis`, `pytest`, `pytest-asyncio`, `httpx`
     - _Requirements: todos (base de proyecto)_
 
-  - [ ] 1.2 Configurar settings y variables de entorno
+  - [x] 1.2 Configurar settings y variables de entorno
     - Implementar `fastapi_app/core/config.py` con `Settings` usando `pydantic-settings`
     - Campos mínimos: `DATABASE_URL`, `SECRET_KEY`, `ACCESS_TOKEN_EXPIRE_MINUTES=60`, `ALGORITHM="HS256"`
     - Crear `.env.example` con todas las variables requeridas (sin valores reales)
@@ -338,7 +338,7 @@ Plan de implementación incremental para el SGI. El backend se construye con Fas
 
 - [ ] 17. Routers REST del backend
   - [ ] 17.1 Implementar `routers/incidencias.py`
-    - `POST /api/v1/incidencias` (USUARIO), `GET /api/v1/incidencias` (Autenticado), `GET /api/v1/incidencias/{id}` (Autenticado), `PATCH /api/v1/incidencias/{id}/estado` (TECNICO, SUPERVISOR), `PATCH /api/v1/incidencias/{id}/prioridad` (SUPERVISOR), `PATCH /api/v1/incidencias/{id}/asignar` (SUPERVISOR)
+    - `POST /api/v1/incidencias` (USUARIO), `GET /api/v1/incidencias` (Autenticado), `GET /api/v1/incidencias/{id}` (Autenticado), `PATCH /api/v1/incidencias/{id}/estado` (TECNICO, SUPERVISOR, ADMINISTRADOR), `PATCH /api/v1/incidencias/{id}/prioridad` (SUPERVISOR, ADMINISTRADOR), `PATCH /api/v1/incidencias/{id}/asignar` (SUPERVISOR, ADMINISTRADOR)
     - _Requirements: 3.1–3.7, 4.1–4.7, 5.1–5.7, 6.1–6.5, 7.1–7.4_
 
   - [ ] 17.2 Implementar `routers/comentarios.py` y `routers/historial.py`
